@@ -1,0 +1,7 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/JamesManningR/vue-boilerplace-project
+
+[submodule "client"]
+	path = client
+	url = https://github.com/JamesManningR/minimal-express-api
