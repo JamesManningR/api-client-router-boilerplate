@@ -6,8 +6,6 @@ services:
     restart: always
     ports:
       - 27017:27017
-    volumes:
-      - data:/data/db
 
   client:
     container_name: client
@@ -16,7 +14,9 @@ services:
       context: ./client
     volumes:
       - ./client:/app
-      - /app/node_modules
+      - /client/node_modules
+    environment:
+      - VUE_APP_NODE_API_URL=api
 
   api:
     container_name: api
