@@ -16,15 +16,17 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: "Login to Azure"
+      - name: "Login to Azure registry"
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.AZURE_REGISTRY_NAME }}.azurecr.io
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - run: |
+
+      - name: "Build containers and push to registry"
+        run: |
           docker-compose -f production.yml build
-          docker-push
+          docker-compose push
 
       - name: "Deploy to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
