@@ -38,8 +38,8 @@ jobs:
 
       - name: "Push to dockerhub"
         run: |
-          docker build -t ${ DOCKER_REGISTRY }/example-app-client ./client
-          docker push ${ DOCKER_REGISTRY }/example-app-client
+          docker build -t ${ DOCKERHUB_USERNAME }/example-app-client ./client
+          docker push ${ DOCKERHUB_USERNAME }/example-app-client
 
   router-image:
     runs-on: ubuntu-latest
