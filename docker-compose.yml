@@ -2,12 +2,13 @@ version: "3"
 services:
   mongo:
     container_name: mongo
-    image: mongo:latest
+    image: mongo:4.4.2
     restart: always
     ports:
       - 27017:27017
 
   client:
+    image: dev-client
     container_name: client
     build:
       dockerfile: Dockerfile.dev
@@ -19,6 +20,7 @@ services:
       - VUE_APP_NODE_API_URL=api
 
   api:
+    image: dev-api
     container_name: api
     depends_on:
       - mongo
@@ -29,12 +31,13 @@ services:
       - ./api:/app
       - /app/node_modules
     environment:
-      - MONGO_URI=${MONGO_URI}
+      - MONGO_LOCATION=${MONGO_LOCATION}
       - NODE_ENV=development
     links:
       - mongo
 
   nginx:
+    image: dev-nginx
     container_name: router
     depends_on:
       - api

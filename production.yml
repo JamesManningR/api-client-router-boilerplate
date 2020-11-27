@@ -1,0 +1,37 @@
+version: "3.1"
+
+services:
+  client:
+    image: jr98containerRegistry.azurecr.io/example-client:v1
+    container_name: client
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+
+  api:
+    image: jr98containerRegistry.azurecr.io/example-api:v1
+    container_name: api
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    environment:
+      - MONGO_LOCATION=${MONGO_LOCATION}
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - NODE_ENV=development
+
+  nginx:
+    image: jr98containerRegistry.azurecr.io/example-router:v1
+    container_name: router
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "1337:7888"
