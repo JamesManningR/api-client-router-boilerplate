@@ -11,13 +11,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
       - name: "Checkout Github"
-        uses: Mushus/checkout-submodule@v1
+        uses: actions/checkout@v2
         with:
-          submodulePath: ./api
+          submodules: true
+
       - name: "Push to dockerhub"
         run: |
-          docker build -t ${ DOCKER_REGISTRY }/example-app-api
+          docker build -t ${ DOCKER_REGISTRY }/example-app-api ./api
           docker push ${ DOCKER_REGISTRY }/example-app-api
 
   client-image:
@@ -28,13 +30,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
       - name: "Checkout Github"
-        uses: Mushus/checkout-submodule@v1
+        uses: actions/checkout@v2
         with:
-          submodulePath: ./client
+          submodules: true
+
       - name: "Push to dockerhub"
         run: |
-          docker build -t ${ DOCKER_REGISTRY }/example-app-client
+          docker build -t ${ DOCKER_REGISTRY }/example-app-client ./client
           docker push ${ DOCKER_REGISTRY }/example-app-client
 
   router-image:
@@ -45,13 +49,15 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
       - name: "Checkout Github"
-        uses: Mushus/checkout-submodule@v1
+        uses: actions/checkout@v2
         with:
-          submodulePath: ./router
+          submodules: true
+
       - name: "Push to dockerhub"
         run: |
-          docker build -t ${ DOCKER_REGISTRY }/example-app-router
+          docker build -t ${ DOCKER_REGISTRY }/example-app-router ./router
           docker push ${ DOCKER_REGISTRY }/example-app-router
   # push-to-staging:
   #   runs-on: ubuntu-latest
