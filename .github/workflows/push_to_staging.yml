@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker-compose build
+          docker-compose -f production.yml build
           docker-push
 
       - name: "Deploy to Azure Container Instances"
