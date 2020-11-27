@@ -26,7 +26,9 @@ jobs:
       - name: "Build containers and push to registry"
         run: |
           docker-compose -f production.yml build
-          docker-compose push
+          docker-compose push ${{ secrets.AZURE_REGISTRY_NAME }}azurecr.io/example-router:v1
+          docker-compose push ${{ secrets.AZURE_REGISTRY_NAME }}azurecr.io/example-api:v1
+          docker-compose push ${{ secrets.AZURE_REGISTRY_NAME }}azurecr.io/example-client:v1
 
       - name: "Deploy to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
