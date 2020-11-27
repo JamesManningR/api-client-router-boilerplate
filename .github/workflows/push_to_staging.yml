@@ -19,8 +19,8 @@ jobs:
 
       - name: "Push to dockerhub"
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/example-app-api ./api
-          docker push ${{ secrets.DOCKER_USERNAME }}/example-app-api
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-api ./api
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-api
 
   client-image:
     runs-on: ubuntu-latest
@@ -38,8 +38,8 @@ jobs:
 
       - name: "Push to dockerhub"
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/example-app-client ./client
-          docker push ${{ secrets.DOCKER_USERNAME }}/example-app-client
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-client ./client
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-client
 
   router-image:
     runs-on: ubuntu-latest
@@ -57,8 +57,8 @@ jobs:
 
       - name: "Push to dockerhub"
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/example-app-router ./router
-          docker push ${{ secrets.DOCKER_USERNAME }}/example-app-router
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-router ./router
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-router
   # push-to-staging:
   #   runs-on: ubuntu-latest
   #   steps:
