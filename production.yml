@@ -14,9 +14,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./api
-    volumes:
-      - ./api:/app
-      - /app/node_modules
     environment:
       - MONGO_LOCATION=${MONGO_LOCATION}
       - MONGO_USERNAME=${MONGO_USERNAME}
