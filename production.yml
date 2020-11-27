@@ -2,14 +2,14 @@ version: "3.1"
 
 services:
   client:
-    image: jr98containerRegistry.azurecr.io/example-client:v1
+    image: example-web-app-client
     container_name: client
     build:
       dockerfile: Dockerfile
       context: ./client
 
   api:
-    image: jr98containerRegistry.azurecr.io/example-api:v1
+    image: example-web-app-api
     container_name: api
     build:
       dockerfile: Dockerfile
@@ -21,7 +21,7 @@ services:
       - NODE_ENV=development
 
   nginx:
-    image: jr98containerRegistry.azurecr.io/example-router:v1
+    image: example-web-app-router
     container_name: router
     depends_on:
       - api

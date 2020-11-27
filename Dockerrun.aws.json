@@ -1,0 +1,30 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "jamesmanningr/example-app-boilerplate-app-client",
+      "hostname": "client",
+      "essential": false
+    },
+        {
+      "name": "api",
+      "image": "jamesmanningr/example-app-boilerplate-app-api",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "router",
+      "image": "jamesmanningr/example-app-boilerplate-app-router",
+      "hostname": "router",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 1337,
+          "containerPort": 7888
+        }
+      ],
+      "links": [ "client", "api" ]
+    }
+  ]
+}
