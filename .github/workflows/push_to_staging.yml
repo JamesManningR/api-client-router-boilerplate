@@ -17,10 +17,11 @@ jobs:
         with:
           submodules: true
 
+      - name: "Build Image"
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-api ./api
+
       - name: "Push to dockerhub"
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-api ./api
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-api
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-api
 
   client-image:
     runs-on: ubuntu-latest
@@ -36,10 +37,11 @@ jobs:
         with:
           submodules: true
 
+      - name: "Build Image"
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-client ./client
+
       - name: "Push to dockerhub"
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-client ./client
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-client
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-client
 
   router-image:
     runs-on: ubuntu-latest
@@ -55,17 +57,18 @@ jobs:
         with:
           submodules: true
 
+      - name: "Build Image"
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-router ./nginx
+
       - name: "Push to dockerhub"
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/example-app-router ./nginx
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-router
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/example-app-router
 
   aws-deploy:
     runs-on: ubuntu-latest
     needs: [api-image, client-image, router-image]
     steps:
       - name: Checkout source code
-        uses: docker/login-action@v1
+        uses: actions/checkout@v2
         with:
           submodules: true
 
