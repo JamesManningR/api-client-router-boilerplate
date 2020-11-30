@@ -5,19 +5,22 @@
       "name": "client",
       "image": "jamesmanningr/example-app-boilerplate-app-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": 128,
     },
         {
       "name": "api",
       "image": "jamesmanningr/example-app-boilerplate-app-api",
       "hostname": "api",
-      "essential": false
+      "essential": false,
+      "memory": 128,
     },
     {
       "name": "router",
       "image": "jamesmanningr/example-app-boilerplate-app-router",
       "hostname": "router",
       "essential": true,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": 1337,
