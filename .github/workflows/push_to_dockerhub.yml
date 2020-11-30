@@ -1,6 +1,10 @@
 name: Deploy to Dockerhub
 
-on: workflow_dispatch
+on:
+  repository_dispatch:
+    types:
+      - run_push_to_dockerhub
+  workflow_dispatch:
 
 jobs:
   api-image:

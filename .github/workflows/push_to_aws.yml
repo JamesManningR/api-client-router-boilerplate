@@ -1,6 +1,10 @@
 name: Push to AWS
 
-on: workflow_dispatch
+on:
+  repository_dispatch:
+    types:
+      - run_push_to_aws
+  workflow_dispatch:
 
 jobs:
   aws-deploy:
