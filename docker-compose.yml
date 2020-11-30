@@ -36,7 +36,7 @@ services:
     links:
       - mongo
 
-  nginx:
+  router:
     image: dev-nginx
     container_name: router
     depends_on:
@@ -45,6 +45,6 @@ services:
     restart: always
     build:
       dockerfile: Dockerfile.dev
-      context: ./nginx
+      context: ./router
     ports:
       - "1337:7888"

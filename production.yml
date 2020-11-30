@@ -20,7 +20,7 @@ services:
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - NODE_ENV=development
 
-  nginx:
+  router:
     image: example-web-app-router
     container_name: router
     depends_on:
@@ -29,6 +29,6 @@ services:
     restart: always
     build:
       dockerfile: Dockerfile
-      context: ./nginx
+      context: ./router
     ports:
       - "1337:7888"
