@@ -1,5 +1,12 @@
 version: "3"
 services:
+  mongo:
+    container_name: mongo
+    image: mongo:4.4.2
+    restart: always
+    ports:
+      - 27017:27017
+
   client:
     image: dev-client
     container_name: client
@@ -15,12 +22,19 @@ services:
   api:
     image: dev-api
     container_name: api
+    depends_on:
+      - mongo
     build:
       dockerfile: Dockerfile.dev
       context: ./api
     volumes:
       - ./api:/app
       - /app/node_modules
+    environment:
+      - MONGO_LOCATION=${MONGO_LOCATION}
+      - NODE_ENV=development
+    links:
+      - mongo
 
   router:
     image: dev-nginx
